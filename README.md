@@ -2,34 +2,59 @@
 
 ![newtons-coin-cradle](Images/newtons-coin-cradle.jpg)
 
-## Background
+## hd-wallet-derive
 
-Your new startup is focusing on building a portfolio management system that supports not only traditional assets
-like gold, silver, stocks, etc, but crypto-assets as well! The problem is, there are so many coins out there! It's
-a good thing you understand how HD wallets work, since you'll need to build out a system that can create them.
+hd-wallet-derive is a command-line tool to manage Bitcoin, ETH and other crypto currencies in a single place.
 
-You're in a race to get to the market. There aren't as many tools available in Python for this sort of thing, yet.
-Thankfully, you've found a command line tool, `hd-wallet-derive` that supports not only BIP32, BIP39, and BIP44, but
-also supports non-standard derivation paths for the most popular wallets out there today! However, you need to integrate
-the script into your backend with your dear old friend, Python.
-
-Once you've integrated this "universal" wallet, you can begin to manage billions of addresses across 300+ coins, giving
-you a serious edge against the competition.
-
-In this assignment, however, you will only need to get 2 coins working: Ethereum and Bitcoin Testnet.
-Ethereum keys are the same format on any network, so the Ethereum keys should work with your custom networks or testnets.
-
-## Dependencies
-
-- PHP must be installed on your operating system (any version, 5 or 7). Don't worry, you will *not* need to know any PHP.
-
-- You will need to clone the [`hd-wallet-derive`](https://github.com/dan-da/hd-wallet-derive) tool.
-
-- [`bit`](https://ofek.github.io/bit/) Python Bitcoin library.
-
-- [`web3.py`](https://github.com/ethereum/web3.py) Python Ethereum library.
+To be able to work with hd-wallet-derive, the following steps were done:
 
 ## Instructions
+
+1. hd-Wallet and dependencies installation (in a new directory "wallet"):
+      
+        brew install php@7.2
+        export PATH=/usr/local/opt/php@7.2/bin:$PATH
+        echo "export PATH=/usr/local/opt/php@7.2/bin:$PATH" >> ~/.bash_profile
+        
+        git clone https://github.com/dan-da/hd-wallet-derive
+        cd hd-wallet-derive
+        php -r "readfile('https://getcomposer.org/installer');" | php
+        
+        php -d pcre.jit=0 composer.phar install
+        
+        ln -s hd-wallet-derive.php derive
+
+Before:
+![Picture1](Images/Picture1.png)
+
+After:
+![Picture2](Images/Picture2.png)
+
+
+2. Testing:
+./derive -g --mnemonic="leader boost evolve jealous vocal buddy tattoo ghost orbit online cloth number" --cols=path,address,privkey,pubkey
+
+![Picture3](Images/Picture3.png)
+
+3. Create the .env file in wallet directory:
+
+MNEMONIC=" leader boost evolve jealous vocal buddy tattoo ghost orbit online cloth number"
+
+![Picture4](Images/Picture4.png)
+
+4. Install bit and web3 libraries using pip (included in requirements.txt file
+
+5. The following Python files were created to interact with hd-wallet functionallity:
+        
+          constants.py
+          wallet.py
+
+5. once intalled hd-wallet-derive, in a python command line:
+
+          from wallet import *
+          ![Picture5](Images/Picture5.png)
+
+
 
 ### Project setup
 
